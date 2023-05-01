@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 4px;
+  font-size: 15px;
+}
+
+.date {
+  margin-right: 10px;
+}

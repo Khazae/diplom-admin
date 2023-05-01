@@ -1,0 +1,7 @@
+.wrapper {
+  display: flex;
+  font-size: 13px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

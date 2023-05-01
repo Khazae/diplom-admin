@@ -1,0 +1,22 @@
+.wrapper {
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  color: #6f7074;
+  background-color: #c6c7cb4e;
+}
+
+.success {
+  color: #62bf23;
+  background-color: #7bd3401c;
+}
+
+.error {
+  color: #f44336;
+  background-color: #f443361d;
+}
+
+.warning {
+  color: #ff9800;
+  background-color: #ff98001c;
+}

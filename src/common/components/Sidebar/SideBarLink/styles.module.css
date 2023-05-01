@@ -1,0 +1,29 @@
+.item {
+  width: 100%;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.link {
+  width: 100%;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.657);
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  transition: 300ms;
+  border-radius: 4px;
+}
+
+.linkActive {
+  color: white;
+}
+
+.icon {
+  margin-right: 10px;
+  font-size: 16px;
+  vertical-align: top;
+}

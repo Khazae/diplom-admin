@@ -1,0 +1,25 @@
+.items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.item {
+  width: 250px;
+  height: 250px;
+  margin-bottom: 70px;
+  text-align: center;
+  position: relative;
+}
+
+.iconContent {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.icon {
+  color: var(--color-primary);
+  font-size: 18px;
+}

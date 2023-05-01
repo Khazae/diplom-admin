@@ -1,0 +1,10 @@
+.wrapper {
+  height: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  font-size: 13px;
+}

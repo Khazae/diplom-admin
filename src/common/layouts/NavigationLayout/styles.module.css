@@ -1,0 +1,14 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  background-color: var(--color-secondary-background);
+}
+
+.main {
+  display: grid;
+  grid-template-rows: 64px 1fr;
+}
+
+.content {
+  padding: 68px 0;
+}

@@ -1,0 +1,5 @@
+.wrapper > span {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+}
