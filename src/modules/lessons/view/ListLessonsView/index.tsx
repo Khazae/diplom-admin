@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Lesson } from "../../../../entities/lesson";
 import ListLessonsCards from "../../components";
 import { fetchAllLessons } from "../../../../api/modules/lessons/requests/fetchAllLessons";
-import styles from "../../components/styles.module.css";
 import {
   showErrorNotification,
   showSuccessNotification,

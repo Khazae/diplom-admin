@@ -2,34 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { DetailLesson } from "../../../../entities/detailLesson";
 import { fetchGetLesson } from "../../../../api/modules/lessons/requests/fetchGetLesson";
-import Icon from "../../../../common/components/Icon";
-import styles from "./styles.module.css";
-import Modal from "../../../../common/components/Modal";
 import { editLesson } from "../../../../api/modules/detailsLesson/requests/editLesson";
-
-interface LessonItemProps {
-  day: string;
-  lessons: string[];
-  onEdit: (day: string, lessons: string[]) => void;
-}
-
-const LessonItem = ({ day, lessons, onEdit }: LessonItemProps) => (
-  <div className={styles.items}>
-    <section className={styles.item}>
-      <div className={styles.iconContent} onClick={() => onEdit(day, lessons)}>
-        <Icon icon="bx-edit-alt" className={styles.icon} />
-      </div>
-      <h2>{day}</h2>
-      <br />
-      <div>
-        {lessons.map((lesson, index) => (
-          <h4 key={index}>{lesson}</h4>
-        ))}
-      </div>
-      <br />
-    </section>
-  </div>
-);
+import LessonDetailsCards from "../../components/LessonDetailsCards";
+import LessonEditModal from "../../components/EditModal";
 
 const ListLessonDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -42,7 +17,7 @@ const ListLessonDetails = () => {
     day: string;
     lessonsId: string;
     lessons: string[];
-  } | null>(null);
+  }>({ day: "", lessonsId: "", lessons: [] });
 
   useEffect(() => {
     if (!id) return;
@@ -71,16 +46,14 @@ const ListLessonDetails = () => {
     setEditData({ day, lessonsId, lessons });
   };
 
-  const handleEditLesson = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const { day, lessonsId, lessons } = editData || {};
-
-    const dataLessons = lessons?.filter((item) => item !== "");
-
-    if (day && lessonsId && dataLessons && editLesson) {
+  const handleEditLesson = async (
+    day: string,
+    lessonsId: string,
+    lessons: string[]
+  ) => {
+    if (day && lessonsId && lessons && editLesson) {
       try {
-        const [updateLesson] = await editLesson(lessonsId, day, dataLessons);
+        const [updateLesson] = await editLesson(lessonsId, day, lessons);
         setLesson((prevLesson) =>
           prevLesson.map((item) =>
             item.lessonsId === lessonsId ? { ...item, ...updateLesson } : item
@@ -97,9 +70,20 @@ const ListLessonDetails = () => {
 
   const addEmptyLesson = () => {
     setEditData((prevLesson) => {
-      if (!prevLesson) return null;
-      const newLessons = [...prevLesson?.lessons, ""];
+      const newLessons = [...prevLesson.lessons, ""];
       return { ...prevLesson, lessons: newLessons };
+    });
+  };
+
+  const handleChangeEditData = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    setEditData({
+      ...editData,
+      lessons: editData.lessons.map((l, i) =>
+        i === index ? e.target.value : l
+      ),
     });
   };
 
@@ -115,7 +99,7 @@ const ListLessonDetails = () => {
     <div>
       {lesson[0] &&
         lesson[0].lessons.map((item) => (
-          <LessonItem
+          <LessonDetailsCards
             key={item._id}
             day={item.day}
             lessons={item.lesson}
@@ -123,37 +107,41 @@ const ListLessonDetails = () => {
           />
         ))}
       {modalVisible && (
-        <Modal onClose={() => setModalVisible(false)} show={modalVisible}>
-          Редактировать
-          <form onSubmit={handleEditLesson}>
-            <input type="text" value={editData?.day} disabled />
-            {editData?.lessons.map((lesson, index) => (
-              <input
-                key={index}
-                type="text"
-                value={lesson}
-                onChange={(e) =>
-                  setEditData({
-                    ...editData,
-                    lessons: editData?.lessons.map((l, i) =>
-                      i === index ? e.target.value : l
-                    ),
-                  })
-                }
-              />
-            ))}
+        <LessonEditModal
+          visible={modalVisible}
+          onClose={() => setModalVisible(false)}
+          onSave={handleEditLesson}
+          onAddLesson={addEmptyLesson}
+          onChangeLesson={handleChangeEditData}
+          day={editData.day}
+          lessonsId={editData.lessonsId}
+          lessons={editData.lessons}
+        />
 
-            <br />
-            <br />
-            <br />
+        // <Modal onClose={() => setModalVisible(false)} show={modalVisible}>
+        //   Редактировать
+        //   <form onSubmit={handleEditLesson}>
+        //     <input type="text" value={editData?.day} disabled />
+        //     {editData?.lessons.map((lesson, index) => (
+        //       <input
+        //         key={index}
+        //         type="text"
+        //         value={lesson}
+        //         onChange={(e) => handleChangeEditData(e, index)}
+        //       />
+        //     ))}
 
-            <button type="button" onClick={addEmptyLesson}>
-              Добавить урок
-            </button>
+        //     <br />
+        //     <br />
+        //     <br />
 
-            <button type="submit">Save</button>
-          </form>
-        </Modal>
+        //     <button type="button" onClick={addEmptyLesson}>
+        //       Добавить урок
+        //     </button>
+
+        //     <button type="submit">Save</button>
+        //   </form>
+        // </Modal>
       )}
     </div>
   );

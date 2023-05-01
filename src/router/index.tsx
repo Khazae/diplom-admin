@@ -5,9 +5,9 @@ import ListUsersView from "../modules/users/views/ListUsersView";
 import ListLessonsView from "../modules/lessons/view/ListLessonsView";
 import StatisticsView from "../modules/statistics/views/StatisticsView";
 import NonAuthGuardLayout from "../common/layouts/NonAuthGuardLayout";
-import ListLessonDetails from "../modules/lessons/view/ListLessonDetails";
 import LoginView from "../modules/auth/view/LoginView";
 import AuthGuardLayout from "../common/layouts/AuthGuardLayout";
+import ListLessonDetails from "../modules/lessonsDetails/view/ListLessonDetails";
 
 const router = createBrowserRouter([
   {

@@ -1,25 +1,31 @@
-import React, { useState } from "react";
+import { ReactNode, useState } from "react";
 import styles from "./styles.module.css";
 
-interface ModalProps {
-  show: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
+interface Props {
+  show?: boolean;
+  onClose?: () => void;
+  size?: string;
+  children?: ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ show, onClose, children }) => {
+const Modal = ({ show, onClose, size = "50", children }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(show);
 
   const closeModal = () => {
     setIsModalOpen(false);
-    onClose();
+    onClose?.();
+  };
+
+  const sizeStyle = {
+    width: `${size}%`,
+    height: `${size}%`,
   };
 
   return (
     <>
       {isModalOpen && (
         <div className={styles.modal}>
-          <div className={styles.modalContent}>
+          <div className={styles.modalContent} style={sizeStyle}>
             <span className={styles.close} onClick={closeModal}>
               &times;
             </span>

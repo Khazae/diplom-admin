@@ -1,0 +1,21 @@
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px 0;
+  margin: 20px 0;
+}
+
+.input {
+  padding: 15px;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  background-color: var(--color-primary-background);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
