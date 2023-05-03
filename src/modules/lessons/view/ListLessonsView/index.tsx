@@ -7,7 +7,7 @@ import {
   showSuccessNotification,
 } from "../../../../common/utils/notifications";
 import { fetchDeleteLesson } from "../../../../api/modules/lessons/requests/fetchDeleteLesson";
-import Modal from "../../../../common/components/Modal";
+import DeleteLessonModal from "../../components/DeleteLessonModal";
 
 const ListLessonsView = () => {
   const [lessonsGroupId, setLessonsGroupId] = useState("");
@@ -81,15 +81,22 @@ const ListLessonsView = () => {
         error={error}
       />
       {modalVisible && (
-        <Modal onClose={() => setModalVisible(false)} show={modalVisible}>
-          Точно хотите удалить группу?
-          {modalSubmittingLoading && <h3>Отправка...</h3>}
-          <br />
-          <button onClick={() => setModalVisible(false)}>
-            Net
-          </button> <br />{" "}
-          <button onClick={(e) => handleCreateLessonModalSubmit(e)}>Da</button>
-        </Modal>
+        <DeleteLessonModal
+          visible={modalVisible}
+          onClose={() => setModalVisible(false)}
+          loading={modalSubmittingLoading}
+          submit={(e) => handleCreateLessonModalSubmit(e)}
+        />
+
+        // <Modal onClose={() => setModalVisible(false)} show={modalVisible}>
+        //   Точно хотите удалить группу?
+        //   {modalSubmittingLoading && <h3>Отправка...</h3>}
+        //   <br />
+        //   <button onClick={() => setModalVisible(false)}>
+        //     Net
+        //   </button> <br />{" "}
+        //   <button onClick={(e) => handleCreateLessonModalSubmit(e)}>Da</button>
+        // </Modal>
       )}
     </>
   );
