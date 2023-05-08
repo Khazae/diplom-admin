@@ -3,8 +3,8 @@ import styles from "./styles.module.css";
 
 interface LessonItemProps {
   day: string;
-  lessons: string[];
-  onEdit: (day: string, lessons: string[]) => void;
+  lessons: any;
+  onEdit: (day: string, lessons: any) => void;
 }
 
 const LessonDetailsCards = ({ day, lessons, onEdit }: LessonItemProps) => (
@@ -16,9 +16,16 @@ const LessonDetailsCards = ({ day, lessons, onEdit }: LessonItemProps) => (
       <h2>{day}</h2>
       <br />
       <div>
-        {lessons.map((lesson, index) => (
-          <h4 key={index}>{lesson}</h4>
-        ))}
+        {lessons &&
+          lessons.map((lesson, index) => (
+            <div key={index} className={styles.itemLesson}>
+              <h4>{lesson.lesson}</h4>
+              <h4>{lesson.teacher}</h4>
+              <h4>{lesson.time}</h4>
+              <h4>{lesson.room}</h4>
+              <br />
+            </div>
+          ))}
       </div>
       <br />
     </section>

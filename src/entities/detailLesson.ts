@@ -6,5 +6,5 @@ export interface DetailLesson {
 interface DLesson {
   _id: string;
   day: string;
-  lesson: string[];
+  lesson: any;
 }

@@ -11,6 +11,7 @@
   margin-bottom: 70px;
   text-align: center;
   position: relative;
+  overflow: auto;
 }
 
 .iconContent {

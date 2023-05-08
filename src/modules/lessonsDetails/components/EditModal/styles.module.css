@@ -5,6 +5,11 @@
   margin: 20px 0;
 }
 
+.item {
+  display: flex;
+  gap: 0 20px;
+}
+
 .input {
   padding: 15px;
   border: none;
